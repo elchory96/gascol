@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ModalController } from 'ionic-angular';
 import { GasService } from '../../shared/gas-service';
+import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas'
 import {
   GoogleMaps,
   GoogleMap,
@@ -37,7 +38,8 @@ export class MapPage {
 
   constructor(
     private navCtrl: NavController,
-    public gaserv: GasService
+    public gaserv: GasService,
+    public modalCtrl: ModalController
   ) {
     
   }
@@ -172,7 +174,10 @@ export class MapPage {
       'lng': parseFloat(json[item].longitud_gas)
     }
     this.map.addMarker(marker).then((marker: Marker) => {
-      
+      marker.one(GoogleMapsEvent.MARKER_CLICK).then(() => {
+        let modal = this.modalCtrl.create(ModalDetailGasPage);
+        modal.present();
+      });
     });
     // this.markers.push(marker);
     if (totalCont == item) {
