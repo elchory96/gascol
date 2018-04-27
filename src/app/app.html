@@ -1,0 +1,31 @@
+<ion-menu type="overlay" side="left" [content]="content">
+  <ion-content>
+    <ul class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <!-- <img src="http://materializecss.com/images/office.jpg"> -->
+                </div>
+                <a href="#user">
+                    <img class="circle" src="https://www.cabe-africa.org/wp-content/uploads/2012/01/1.png">
+                </a>
+                <a href="#name">
+                    <span class="white-text name">Nombre Usuario</span>
+                </a>
+                <a href="#name">
+                    <span class="white-text email">correousuario@gmail.com</span>
+                </a>
+            </div>
+        </li>
+        <li>
+            <!-- <a href="mapa.html" class="link external">
+                <i class="material-icons">map</i> Mapa
+            </a> -->
+            <a href="#">
+                <ion-icon name="list"></ion-icon> Lista de gasolineras
+            </a>
+        </li>
+    </ul>
+  </ion-content>
+</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>
