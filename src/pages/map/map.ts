@@ -143,17 +143,17 @@ export class MapPage {
                                      // posición x: 50, y: 50 de la imagen.
     }
     let markerUrl = canvas.toDataURL();
-    let htmlContent = '<div class="infowindow">\
-                          <div class="title">\
-                            <p class=""><i class="material-icons">local_offer</i> '+json[item].label_gas+'</p>\
-                          </div>\
-                          <div class="info">\
-                            <p class=""><i class="material-icons">event</i> '+json[item].info_gas+'</p>\
-                            <p class=""><i class="material-icons">location_on</i> '+json[item].direccion_gas+'</p>\
-                            <p class=""><i class="material-icons">attach_money</i> '+json[item].vlr_dtg+'</p>\
-                            <p class=""><i class="material-icons">local_gas_station</i> '+json[item].desc_param+'</p>\
-                          </div>\
-                        </div>';
+    // let htmlContent = '<div class="infowindow">\
+    //                       <div class="title">\
+    //                         <p class=""><i class="material-icons">local_offer</i> '+json[item].label_gas+'</p>\
+    //                       </div>\
+    //                       <div class="info">\
+    //                         <p class=""><i class="material-icons">event</i> '+json[item].info_gas+'</p>\
+    //                         <p class=""><i class="material-icons">location_on</i> '+json[item].direccion_gas+'</p>\
+    //                         <p class=""><i class="material-icons">attach_money</i> '+json[item].vlr_dtg+'</p>\
+    //                         <p class=""><i class="material-icons">local_gas_station</i> '+json[item].desc_param+'</p>\
+    //                       </div>\
+    //                     </div>';
     let marker = {
       'position': {
           'lat': parseFloat(json[item].latitud_gas),
@@ -166,16 +166,20 @@ export class MapPage {
               height: 60
           }
       },
-      'content': htmlContent,
+      'titlegas': json[item].label_gas,
+      'preciogas': json[item].vlr_dtg,
+      'horariogas': json[item].info_gas,
       'disableAutoPan': true,
-      // 'title': json[item].label_gas,
-      // 'snippet': json[item].info_gas + '\n' + json[item].direccion_gas + '\n$ ' + json[item].vlr_dtg + '\n' + json[item].desc_param,
       'lat': parseFloat(json[item].latitud_gas),
       'lng': parseFloat(json[item].longitud_gas)
     }
     this.map.addMarker(marker).then((marker: Marker) => {
       marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        let modal = this.modalCtrl.create(ModalDetailGasPage);
+        let modal = this.modalCtrl.create(ModalDetailGasPage,{
+          'titlegas': marker.get('titlegas'),
+          'preciogas': marker.get('preciogas'),
+          'horariogas': marker.get('horariogas'),
+        },{showBackdrop:true, enableBackdropDismiss:true});
         modal.present();
       });
     });
