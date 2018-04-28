@@ -174,7 +174,7 @@ export class MapPage {
       'lng': parseFloat(json[item].longitud_gas)
     }
     this.map.addMarker(marker).then((marker: Marker) => {
-      marker.one(GoogleMapsEvent.MARKER_CLICK).then(() => {
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
         let modal = this.modalCtrl.create(ModalDetailGasPage);
         modal.present();
       });
