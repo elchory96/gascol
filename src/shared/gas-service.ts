@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
 import {Observable} from 'rxjs/Rx';
@@ -12,12 +12,14 @@ export class GasService {
     ){}
 
     public getGas(location){
-        let gasolinas = this.http.post('http://www.zona-habitat.com/zh/index.php/GassAll/datosDetalle', { 
-            lat: location.lat, 
-            lng: location.lng,
-            dis: 1 
-        }, {}).map(response => {
-        return response.json();
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+        let gasolinas = this.http.post(
+            'http://www.zona-habitat.com/zh/index.php/GassAll/datosDetalle',
+            'lat=' + location.lat + '&lng=' + location.lng + '&dis=' + 1, 
+            options
+        ).map(response => {
+            return response.json();
         });
 
        return gasolinas;
