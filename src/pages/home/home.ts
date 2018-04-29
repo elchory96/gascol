@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
+import { MapPage } from '../map/map'
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,14 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  registerCredentials = { email: '', password: '' };
+  
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {
+    this.menuCtrl.enable(false, 'myMenu');
+  }
 
+  login() {
+    this.navCtrl.setRoot(MapPage);
   }
 
 }

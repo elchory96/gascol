@@ -1,5 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ModalController } from 'ionic-angular';
+import { 
+  IonicPage, 
+  NavController, 
+  NavParams, 
+  ModalController, 
+  MenuController,
+  LoadingController 
+} from 'ionic-angular';
 import { GasService } from '../../shared/gas-service';
 import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas'
 import {
@@ -7,11 +14,6 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  LocationService,
-  MyLocation,
-  MyLocationOptions,
   Marker,
   CircleOptions,
   Circle
@@ -34,14 +36,17 @@ export class MapPage {
   map: GoogleMap;
   positionCurrent: any;
   markers: any[];
+  loadingMapa: any;
   @ViewChild('canvas') canvasEl : ElementRef;
 
   constructor(
     private navCtrl: NavController,
     public gaserv: GasService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController, 
+    public menuCtrl: MenuController,
+    public loadingCtrl: LoadingController
   ) {
-    
+    this.menuCtrl.enable(true, 'myMenu');
   }
 
   ionViewDidLoad(){
@@ -95,7 +100,7 @@ export class MapPage {
       }).then((marker: Marker) => {
         let circleopt: CircleOptions = {
           'center': response.latLng,
-          'radius': 1000,
+          'radius': 5000,
           'strokeColor': '#FFFFFF',
           'strokeWidth': 1,
           'fillColor': '#C6DBFF',
@@ -104,10 +109,16 @@ export class MapPage {
         this.map.addCircle(circleopt).then((circle: Circle) => {
           this.map.moveCamera({
             target: response.latLng,
-            zoom: 14,
+            zoom: 11,
             duration: 2000,
             tilt: 0
-          }).then(() => {this.loadGasMap()});
+          }).then(() => {
+            this.loadingMapa = this.loadingCtrl.create({
+              content: 'Cargando Mapa...'
+            });
+            this.loadingMapa.present();
+            this.loadGasMap()
+          });
         })
       });
     })
@@ -123,7 +134,7 @@ export class MapPage {
       this.markers = [];
       let canvas = this.canvasEl.nativeElement;
       let img = new Image();
-      img.src='assets/imgs/markermap3-min.png';
+      img.src='assets/imgs/image.png';
       img.addEventListener("load", function() {
           canvas.width = img.width
           canvas.height = img.height
@@ -136,10 +147,10 @@ export class MapPage {
     let totalCont = total - 1;
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
-        ctx.font = '400px Arial';
+        ctx.font = '55px Arial';
         ctx.fillStyle = 'white';
         ctx.drawImage(img, 0, 0);
-        ctx.fillText('$ ' + json[item].vlr_dtg, 80, 850); // Esto añade el texto '1.5' en la
+        ctx.fillText('$ ' + json[item].vlr_dtg, 10, 120); // Esto añade el texto '1.5' en la
                                      // posición x: 50, y: 50 de la imagen.
     }
     let markerUrl = canvas.toDataURL();
@@ -185,7 +196,7 @@ export class MapPage {
     });
     // this.markers.push(marker);
     if (totalCont == item) {
-      console.log('Se agregaron los marcadores');
+      this.loadingMapa.dismiss();
     }else{
       item = item + 1;
       this.drawMarkersMap(json,item,json.length,img,canvas);

@@ -1,3 +1,23 @@
 page-home {
-
+    ion-content{
+        background-color: #7a7a7b;
+        .container{
+            display: flex;
+            height: 100%;
+            flex-wrap: wrap;
+            text-align: center;
+            .logo{
+                width: 100%;
+                margin-right: auto;
+                align-self: flex-end;
+            }
+            .formulario{
+                width: 100%;
+            }
+            .formbuttom{
+                width: 100%;
+                align-self: flex-end;
+            }
+        }
+    }
 }

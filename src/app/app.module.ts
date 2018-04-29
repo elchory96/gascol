@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { MapPage } from '../pages/map/map';
+import { HomePage } from '../pages/home/home';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HttpModule } from '@angular/http';
 import { GasService } from '../shared/gas-service'
@@ -15,6 +16,7 @@ import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas'
   declarations: [
     MyApp,
     MapPage,
+    HomePage,
     ModalDetailGasPage
   ],
   imports: [
@@ -26,6 +28,7 @@ import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas'
   entryComponents: [
     MyApp,
     MapPage,
+    HomePage,
     ModalDetailGasPage
   ],
   providers: [

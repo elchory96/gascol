@@ -16,7 +16,7 @@ export class GasService {
         let options = new RequestOptions({ headers: headers });
         let gasolinas = this.http.post(
             'http://www.zona-habitat.com/zh/index.php/GassAll/datosDetalle',
-            'lat=' + location.lat + '&lng=' + location.lng + '&dis=' + 1, 
+            'lat=' + location.lat + '&lng=' + location.lng + '&dis=' + 5, 
             options
         ).map(response => {
             return response.json();
