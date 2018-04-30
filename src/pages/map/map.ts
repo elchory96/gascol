@@ -5,10 +5,12 @@ import {
   NavParams, 
   ModalController, 
   MenuController,
-  LoadingController 
+  LoadingController,
+  Events 
 } from 'ionic-angular';
 import { GasService } from '../../shared/gas-service';
 import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas'
+import { ModalListGasPage } from '../modal-list-gas/modal-list-gas'
 import {
   GoogleMaps,
   GoogleMap,
@@ -37,6 +39,7 @@ export class MapPage {
   positionCurrent: any;
   markers: any[];
   loadingMapa: any;
+  jsonDataGas: any;
   @ViewChild('canvas') canvasEl : ElementRef;
 
   constructor(
@@ -44,8 +47,12 @@ export class MapPage {
     public gaserv: GasService,
     public modalCtrl: ModalController, 
     public menuCtrl: MenuController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController, 
+    public events: Events
   ) {
+    this.events.subscribe('view:listgas', () => {
+      this.verListadoGas();
+    });
     this.menuCtrl.enable(true, 'myMenu');
     // let modal = this.modalCtrl.create(ModalDetailGasPage,{
     //   'titlegas': 'Titulo',
@@ -137,6 +144,7 @@ export class MapPage {
     let gas = this.gaserv.getGas(this.positionCurrent);
     let thisclas = this;
     gas.subscribe((data)=>{
+      this.jsonDataGas = data;
       this.markers = [];
       let canvas = this.canvasEl.nativeElement;
       let img = new Image();
@@ -146,7 +154,9 @@ export class MapPage {
           canvas.height = img.height
           thisclas.drawMarkersMap(data,0,data.length,img,canvas);                        
       }, false);
-    },()=>{});
+    },()=>{
+      
+    });
   }
 
   public drawMarkersMap(json,item,total,img,canvas){
@@ -156,21 +166,9 @@ export class MapPage {
         ctx.font = '55px Arial';
         ctx.fillStyle = 'white';
         ctx.drawImage(img, 0, 0);
-        ctx.fillText('$ ' + json[item].vlr_dtg, 10, 120); // Esto añade el texto '1.5' en la
-                                     // posición x: 50, y: 50 de la imagen.
+        ctx.fillText('$ ' + json[item].vlr_dtg, 10, 120);
     }
     let markerUrl = canvas.toDataURL();
-    // let htmlContent = '<div class="infowindow">\
-    //                       <div class="title">\
-    //                         <p class=""><i class="material-icons">local_offer</i> '+json[item].label_gas+'</p>\
-    //                       </div>\
-    //                       <div class="info">\
-    //                         <p class=""><i class="material-icons">event</i> '+json[item].info_gas+'</p>\
-    //                         <p class=""><i class="material-icons">location_on</i> '+json[item].direccion_gas+'</p>\
-    //                         <p class=""><i class="material-icons">attach_money</i> '+json[item].vlr_dtg+'</p>\
-    //                         <p class=""><i class="material-icons">local_gas_station</i> '+json[item].desc_param+'</p>\
-    //                       </div>\
-    //                     </div>';
     let marker = {
       'position': {
           'lat': parseFloat(json[item].latitud_gas),
@@ -207,6 +205,9 @@ export class MapPage {
       item = item + 1;
       this.drawMarkersMap(json,item,json.length,img,canvas);
     }
+  }
+  public verListadoGas(){
+    this.navCtrl.push(ModalListGasPage,{jsonDataGas: this.jsonDataGas});
   }
 
 }

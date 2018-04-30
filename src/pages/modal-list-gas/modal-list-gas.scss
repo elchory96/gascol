@@ -1,0 +1,61 @@
+page-modal-list-gas {
+    .SwipedTabs-indicatorSegment
+    {
+        -webkit-transition: 0.3s all;
+        -moz-transition:  0.3s all;
+        -o-transition:  0.3s all;
+        transition:  0.3s all;
+        transform-origin: top 0 left 0;
+        height: 3px;
+	    position: relative;
+	    top: -2px;
+	    background-color: #1653bf !important;
+    }
+    .SwipedTabs-tabs ion-segment-button
+    {
+    	border:none !important;
+    	color:gray!important;
+    	background-color:white!important;
+    }
+     .SwipedTabs-tabs ion-segment-button.SwipedTabs-activeTab
+    {
+        color:black !important;
+        font-size: 17px;
+        font-weight: bold;
+    }
+    .SwipedTabs-tabs
+    {
+        border-bottom: solid 1px #e6e6e6  !important;
+        height: 50px;
+    }
+    .swiper-slide{
+        display: block;
+    }
+    // My Style
+    .contentitemlist{
+        display: flex;
+        align-items: center;
+        .logo{
+            flex-grow: 1;
+            width: 0%;
+        }
+        .info{
+            flex-grow: 1;
+            padding-left: 10px;
+            p:nth-child(1){
+                font-size: 30px;
+                color: black;
+                font-weight: 100;
+            }
+            p:nth-child(2){
+                font-size: 20px;
+                color: black;
+            }
+        }
+        .price{
+            flex-grow: 0;
+            font-size: 29px;
+            color: #058412;
+        }
+    }
+}

@@ -30,6 +30,54 @@ page-modal-detail-gas {
             align-self: center;
         }
     }
+    ion-content{
+        .positionGas{
+            border-bottom: 1px solid #cdcdcd;
+        }
+        .contentGas{
+            padding-top: 10px;
+            hr{
+                width: 30%;
+                background-color: black;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .direccion,.servicioGas{
+                ion-icon{
+                    zoom: 2;
+                }
+                p{
+                    margin: 0;
+                    margin-top: 5px;
+                }
+                p.title{
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                p.text{
+                    font-size: 17px;
+                }
+                .contentTipoGas{
+                    display: inline-flex;
+                    width: 70%;
+                    align-items: flex-end;
+                    flex-wrap: wrap;
+                    .tipo{
+                        width: 50%;
+                        border-bottom: 1px solid #cdcdcd;
+                        font-weight: bold;
+                    }
+                    .valor{
+                        width: 50%;
+                        border-bottom: 1px solid #cdcdcd;
+                        color: #058412;
+                        font-size: 22px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
 }
 ion-modal.page-modal-detail-gas ion-backdrop {
     visibility: visible !important;

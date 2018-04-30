@@ -11,13 +11,15 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { HttpModule } from '@angular/http';
 import { GasService } from '../shared/gas-service'
 import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas'
+import { ModalListGasPage } from '../pages/modal-list-gas/modal-list-gas'
 
 @NgModule({
   declarations: [
     MyApp,
     MapPage,
     HomePage,
-    ModalDetailGasPage
+    ModalDetailGasPage,
+    ModalListGasPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas'
     MyApp,
     MapPage,
     HomePage,
-    ModalDetailGasPage
+    ModalDetailGasPage,
+    ModalListGasPage
   ],
   providers: [
     StatusBar,
