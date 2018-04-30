@@ -47,6 +47,12 @@ export class MapPage {
     public loadingCtrl: LoadingController
   ) {
     this.menuCtrl.enable(true, 'myMenu');
+    // let modal = this.modalCtrl.create(ModalDetailGasPage,{
+    //   'titlegas': 'Titulo',
+    //   'preciogas': '8.900',
+    //   'horariogas': 'Lunes a viernes de 5 am a 9 pm',
+    // },{showBackdrop:true, enableBackdropDismiss:true});
+    // modal.present();
   }
 
   ionViewDidLoad(){
@@ -100,7 +106,7 @@ export class MapPage {
       }).then((marker: Marker) => {
         let circleopt: CircleOptions = {
           'center': response.latLng,
-          'radius': 5000,
+          'radius': 3000,
           'strokeColor': '#FFFFFF',
           'strokeWidth': 1,
           'fillColor': '#C6DBFF',
@@ -109,7 +115,7 @@ export class MapPage {
         this.map.addCircle(circleopt).then((circle: Circle) => {
           this.map.moveCamera({
             target: response.latLng,
-            zoom: 11,
+            zoom: 13,
             duration: 2000,
             tilt: 0
           }).then(() => {
