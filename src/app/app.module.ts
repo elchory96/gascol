@@ -9,9 +9,10 @@ import { MapPage } from '../pages/map/map';
 import { HomePage } from '../pages/home/home';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HttpModule } from '@angular/http';
-import { GasService } from '../shared/gas-service'
-import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas'
-import { ModalListGasPage } from '../pages/modal-list-gas/modal-list-gas'
+import { GasService } from '../shared/gas-service';
+import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas';
+import { ModalListGasPage } from '../pages/modal-list-gas/modal-list-gas';
+import { SuperTabsModule, SuperTabsController } from 'ionic2-super-tabs';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModalListGasPage } from '../pages/modal-list-gas/modal-list-gas'
   imports: [
     BrowserModule,
     HttpModule,
+    SuperTabsModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -38,6 +40,7 @@ import { ModalListGasPage } from '../pages/modal-list-gas/modal-list-gas'
     StatusBar,
     GoogleMaps,
     HttpModule,
+    SuperTabsController,
     SplashScreen,
     GasService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

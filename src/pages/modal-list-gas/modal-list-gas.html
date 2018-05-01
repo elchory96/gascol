@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Listado gasolineras</ion-title>
   </ion-navbar>
 
@@ -14,82 +14,8 @@
 
 
 <ion-content>
-  <ion-segment  class="SwipedTabs-tabs"  >
-    <ion-segment-button *ngFor='let tab of tabs ; let i = index ' value="IngoreMe" (click)="selectTab(i)"
-    [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }' >
-      {{tab}}
-    </ion-segment-button>
-  </ion-segment>
-  <div id='indicator' class="SwipedTabs-indicatorSegment" [ngStyle]="{'width.%': (100/this.tabs.length)}"></div>
-
-  <ion-slides #SwipedTabsSlider  (ionSlideDrag)="animateIndicator($event)"
-              (ionSlideWillChange)="updateIndicatorPosition()"
-              (ionSlideDidChange)="updateIndicatorPosition()"
-              (pan)="updateIndicatorPosition()"
-              [pager]="false"
-        >
-    <ion-slide>
-      <ion-list>
-        <ion-item>
-          <div class="contentitemlist">
-            <div class="logo">
-              <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-            </div>
-            <div class="info">
-              <p>Repsol</p>
-              <p>4.9 km</p>
-            </div>
-            <div class="price">
-              $ 8.900
-            </div>
-          </div>
-        </ion-item>
-        <ion-item>
-          <div class="contentitemlist">
-            <div class="logo">
-              <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-            </div>
-            <div class="info">
-              <p>Repsol</p>
-              <p>4.9 km</p>
-            </div>
-            <div class="price">
-              $ 8.900
-            </div>
-          </div>
-        </ion-item>
-        <ion-item>
-          <div class="contentitemlist">
-            <div class="logo">
-              <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-            </div>
-            <div class="info">
-              <p>Repsol</p>
-              <p>4.9 km</p>
-            </div>
-            <div class="price">
-              $ 8.900
-            </div>
-          </div>
-        </ion-item>
-        <ion-item>
-          <div class="contentitemlist">
-            <div class="logo">
-              <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-            </div>
-            <div class="info">
-              <p>Repsol</p>
-              <p>4.9 km</p>
-            </div>
-            <div class="price">
-              $ 8.900
-            </div>
-          </div>
-        </ion-item>
-      </ion-list>
-    </ion-slide>
-    <ion-slide>
-      <h1>Page 2 </h1>
-    </ion-slide>
-  </ion-slides>
+  <super-tabs height="100%">
+    <super-tab [root]="sortPrice" title="POR PRECIO"></super-tab>
+    <super-tab [root]="sortDistance" title="POR DISTANCIA"></super-tab>
+  </super-tabs>
 </ion-content>

@@ -1,0 +1,16 @@
+page-sort-price-gas {
+    ion-content{
+        background-color: #efefef !important;
+        padding: 10px;
+        .scroll-content{
+            padding: 10px;
+            ion-list{
+                height: 100%;
+                background-color: white;
+                ion-item{
+                    padding-left: 0px;
+                }
+            }
+        }
+    }
+}
