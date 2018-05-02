@@ -5,8 +5,7 @@ import {
   NavParams, 
   ModalController, 
   MenuController,
-  LoadingController,
-  Events 
+  LoadingController
 } from 'ionic-angular';
 import { GasService } from '../../shared/gas-service';
 import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas'
@@ -47,12 +46,8 @@ export class MapPage {
     public gaserv: GasService,
     public modalCtrl: ModalController, 
     public menuCtrl: MenuController,
-    public loadingCtrl: LoadingController, 
-    public events: Events
+    public loadingCtrl: LoadingController
   ) {
-    this.events.subscribe('view:listgas', () => {
-      this.verListadoGas();
-    });
     this.menuCtrl.enable(true, 'myMenu');
     // let modal = this.modalCtrl.create(ModalDetailGasPage,{
     //   'titlegas': 'Titulo',

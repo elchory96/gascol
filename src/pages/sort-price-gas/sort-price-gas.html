@@ -11,101 +11,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let item of jsonDataPrice">
         <div class="contentitemlist">
           <div class="logo">
             <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
           </div>
           <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
+            <p text-capitalize>{{item.label_gas}}</p>
+            <p>{{item.disttext}}</p>
           </div>
           <div class="price">
-            $ 8.900
-          </div>
-        </div>
-    </ion-item>
-    <ion-item>
-        <div class="contentitemlist">
-          <div class="logo">
-            <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-          </div>
-          <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
-          </div>
-          <div class="price">
-            $ 8.900
-          </div>
-        </div>
-    </ion-item>
-    <ion-item>
-        <div class="contentitemlist">
-          <div class="logo">
-            <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-          </div>
-          <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
-          </div>
-          <div class="price">
-            $ 8.900
-          </div>
-        </div>
-    </ion-item>
-    <ion-item>
-        <div class="contentitemlist">
-          <div class="logo">
-            <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-          </div>
-          <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
-          </div>
-          <div class="price">
-            $ 8.900
-          </div>
-        </div>
-    </ion-item>
-    <ion-item>
-        <div class="contentitemlist">
-          <div class="logo">
-            <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-          </div>
-          <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
-          </div>
-          <div class="price">
-            $ 8.900
-          </div>
-        </div>
-    </ion-item>
-    <ion-item>
-        <div class="contentitemlist">
-          <div class="logo">
-            <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-          </div>
-          <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
-          </div>
-          <div class="price">
-            $ 8.900
-          </div>
-        </div>
-    </ion-item>
-    <ion-item>
-        <div class="contentitemlist">
-          <div class="logo">
-            <img src="http://contabilidadeetapa.com.br/wp-content/uploads/2015/10/Logo-Default.png" alt="logoGas">
-          </div>
-          <div class="info">
-            <p>Repsol</p>
-            <p>4.9 km</p>
-          </div>
-          <div class="price">
-            $ 8.900
+            $ {{item.vlr_dtg}}
           </div>
         </div>
     </ion-item>

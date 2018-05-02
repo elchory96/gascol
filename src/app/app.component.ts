@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, Events, MenuController } from 'ionic-angular';
+import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,8 +13,7 @@ export class MyApp {
   constructor(
     platform: Platform, 
     statusBar: StatusBar, 
-    splashScreen: SplashScreen, 
-    public events: Events,
+    splashScreen: SplashScreen,
     public menuCtrl: MenuController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -23,10 +22,6 @@ export class MyApp {
       // statusBar.styleDefault();
       
     });
-  }
-  public verListadoGas(){
-    this.menuCtrl.close();
-    this.events.publish('view:listgas');
   }
 }
 

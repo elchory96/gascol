@@ -15,11 +15,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SortPriceGasPage {
 
+  public jsonDataPrice: any;
+  rootNavCtrl: NavController;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.jsonDataPrice = navParams.get('jsonDataGas');
+    this.rootNavCtrl = navParams.get('rootNavCtrl');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SortPriceGasPage');
+    this.jsonDataPrice = this.jsonDataPrice.slice().sort((a,b) => {
+      let nameA=a.label_gas.toLowerCase(), nameB=b.label_gas.toLowerCase()
+      return a.price-b.price || nameA < nameB
+    });
+    console.log(this.jsonDataPrice);
   }
 
 }

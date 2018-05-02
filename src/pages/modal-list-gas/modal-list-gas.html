@@ -15,7 +15,7 @@
 
 <ion-content>
   <super-tabs height="100%">
-    <super-tab [root]="sortPrice" title="POR PRECIO"></super-tab>
-    <super-tab [root]="sortDistance" title="POR DISTANCIA"></super-tab>
+    <super-tab [root]="sortPrice" title="POR PRECIO" [rootParams]="{jsonDataGas:jsonDataGas}"></super-tab>
+    <super-tab [root]="sortDistance" title="POR DISTANCIA" [rootParams]="{jsonDataGas:jsonDataGas}"></super-tab>
   </super-tabs>
 </ion-content>

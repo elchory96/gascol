@@ -15,11 +15,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SortDistanceGasPage {
 
+  public jsonDataDistance: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.jsonDataDistance = navParams.get('jsonDataGas');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SortDistanceGasPage');
+    this.jsonDataDistance = this.jsonDataDistance.slice().sort((a,b) => {
+      return a.distanceorigin-b.distanceorigin
+    });
+    console.log(this.jsonDataDistance);
   }
 
 }
