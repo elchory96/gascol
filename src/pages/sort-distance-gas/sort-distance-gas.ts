@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas';
 
 /**
  * Generated class for the SortDistanceGasPage page.
@@ -17,7 +18,11 @@ export class SortDistanceGasPage {
 
   public jsonDataDistance: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public modalCtrl: ModalController
+  ) {
     this.jsonDataDistance = navParams.get('jsonDataGas');
   }
 
@@ -26,6 +31,13 @@ export class SortDistanceGasPage {
       return a.distanceorigin-b.distanceorigin
     });
     console.log(this.jsonDataDistance);
+  }
+
+  public viewDetailGas(item){
+    let modal = this.modalCtrl.create(ModalDetailGasPage,{
+      'jsonGas': item,
+    },{showBackdrop:true, enableBackdropDismiss:true});
+    modal.present();
   }
 
 }

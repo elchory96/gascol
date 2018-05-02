@@ -176,19 +176,15 @@ export class MapPage {
               height: 60
           }
       },
-      'titlegas': json[item].label_gas,
-      'preciogas': json[item].vlr_dtg,
-      'horariogas': json[item].info_gas,
-      'disableAutoPan': true,
+      'jsonGas': json[item],
+      'disableAutoPan': false,
       'lat': parseFloat(json[item].latitud_gas),
       'lng': parseFloat(json[item].longitud_gas)
     }
     this.map.addMarker(marker).then((marker: Marker) => {
       marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
         let modal = this.modalCtrl.create(ModalDetailGasPage,{
-          'titlegas': marker.get('titlegas'),
-          'preciogas': marker.get('preciogas'),
-          'horariogas': marker.get('horariogas'),
+          'jsonGas': marker.get('jsonGas')
         },{showBackdrop:true, enableBackdropDismiss:true});
         modal.present();
       });

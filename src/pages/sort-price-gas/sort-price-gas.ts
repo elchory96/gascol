@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas'
 /**
  * Generated class for the SortPriceGasPage page.
  *
@@ -18,7 +18,10 @@ export class SortPriceGasPage {
   public jsonDataPrice: any;
   rootNavCtrl: NavController;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public modalCtrl: ModalController) {
     this.jsonDataPrice = navParams.get('jsonDataGas');
     this.rootNavCtrl = navParams.get('rootNavCtrl');
   }
@@ -29,6 +32,13 @@ export class SortPriceGasPage {
       return a.price-b.price || nameA < nameB
     });
     console.log(this.jsonDataPrice);
+  }
+
+  public viewDetailGas(item){
+    let modal = this.modalCtrl.create(ModalDetailGasPage,{
+      'jsonGas': item,
+    },{showBackdrop:true, enableBackdropDismiss:true});
+    modal.present();
   }
 
 }

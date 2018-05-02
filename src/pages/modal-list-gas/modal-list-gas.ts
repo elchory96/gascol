@@ -20,7 +20,7 @@ export class ModalListGasPage {
 
   sortPrice: any = 'SortPriceGasPage';
   sortDistance: any = 'SortDistanceGasPage';
-  jsonDataGas: any;
+  public jsonDataGas: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private superTabsCtrl: SuperTabsController) {
     this.jsonDataGas = navParams.get('jsonDataGas');
