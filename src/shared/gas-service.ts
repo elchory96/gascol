@@ -11,12 +11,12 @@ export class GasService {
         public http: Http
     ){}
 
-    public getGas(location){
+    public getGas(location,dis){
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         let gasolinas = this.http.post(
             'http://www.zona-habitat.com/zh/index.php/GassAll/datosDetalle',
-            'lat=' + location.lat + '&lng=' + location.lng + '&dis=' + 3, 
+            'lat=' + location.lat + '&lng=' + location.lng + '&dis=' + dis, 
             options
         ).map(response => {
             return response.json();

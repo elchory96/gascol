@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { GasService } from '../shared/gas-service';
 import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas';
 import { ModalListGasPage } from '../pages/modal-list-gas/modal-list-gas';
+import { PopoverFilterMapPage } from '../pages/popover-filter-map/popover-filter-map';
 import { SuperTabsModule, SuperTabsController } from 'ionic2-super-tabs';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SuperTabsModule, SuperTabsController } from 'ionic2-super-tabs';
     MapPage,
     HomePage,
     ModalDetailGasPage,
-    ModalListGasPage
+    ModalListGasPage,
+    PopoverFilterMapPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { SuperTabsModule, SuperTabsController } from 'ionic2-super-tabs';
     MapPage,
     HomePage,
     ModalDetailGasPage,
-    ModalListGasPage
+    ModalListGasPage,
+    PopoverFilterMapPage
   ],
   providers: [
     StatusBar,

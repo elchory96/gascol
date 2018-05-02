@@ -5,17 +5,24 @@ import {
   NavParams, 
   ModalController, 
   MenuController,
-  LoadingController
+  LoadingController,
+  PopoverController,
+  Events
 } from 'ionic-angular';
 import { GasService } from '../../shared/gas-service';
 import { ModalDetailGasPage } from '../modal-detail-gas/modal-detail-gas'
-import { ModalListGasPage } from '../modal-list-gas/modal-list-gas'
+import { ModalListGasPage } from '../modal-list-gas/modal-list-gas';
+import { PopoverFilterMapPage } from '../popover-filter-map/popover-filter-map';
 import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
   Marker,
+  MarkerLabel,
+  MarkerClusterIcon,
+  MarkerClusterOptions,
+  MarkerCluster,
   CircleOptions,
   Circle
 } from '@ionic-native/google-maps';
@@ -39,6 +46,8 @@ export class MapPage {
   markers: any[];
   loadingMapa: any;
   jsonDataGas: any;
+  distance: number = 1;
+  circlePrimary: any;
   @ViewChild('canvas') canvasEl : ElementRef;
 
   constructor(
@@ -46,9 +55,15 @@ export class MapPage {
     public gaserv: GasService,
     public modalCtrl: ModalController, 
     public menuCtrl: MenuController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private popoverCtrl: PopoverController,
+    public events: Events
   ) {
     this.menuCtrl.enable(true, 'myMenu');
+    events.subscribe('map:filter', (distancerange) => {
+      this.distance = distancerange;
+      this.filterMapLoad();
+    });
     // let modal = this.modalCtrl.create(ModalDetailGasPage,{
     //   'titlegas': 'Titulo',
     //   'preciogas': '8.900',
@@ -108,16 +123,29 @@ export class MapPage {
       }).then((marker: Marker) => {
         let circleopt: CircleOptions = {
           'center': response.latLng,
-          'radius': 3000,
+          'radius': parseInt(this.distance + '000'),
           'strokeColor': '#FFFFFF',
           'strokeWidth': 1,
           'fillColor': '#C6DBFF',
           'fillOpacity': 0.35,
         }
         this.map.addCircle(circleopt).then((circle: Circle) => {
+          this.circlePrimary = circle;
+          let zoom;
+          if (this.distance == 1) {
+              zoom = 14;
+          }else if(this.distance == 2){
+              zoom = 13;
+          }else if(this.distance == 3){
+              zoom = 13;
+          }else if(this.distance == 4){
+              zoom = 12;
+          }else if(this.distance == 5){
+              zoom = 12;
+          }
           this.map.moveCamera({
             target: response.latLng,
-            zoom: 13,
+            zoom: zoom,
             duration: 2000,
             tilt: 0
           }).then(() => {
@@ -136,7 +164,7 @@ export class MapPage {
   }
 
   public loadGasMap(){
-    let gas = this.gaserv.getGas(this.positionCurrent);
+    let gas = this.gaserv.getGas(this.positionCurrent,this.distance);
     let thisclas = this;
     gas.subscribe((data)=>{
       this.jsonDataGas = data;
@@ -181,16 +209,45 @@ export class MapPage {
       'lat': parseFloat(json[item].latitud_gas),
       'lng': parseFloat(json[item].longitud_gas)
     }
-    this.map.addMarker(marker).then((marker: Marker) => {
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        let modal = this.modalCtrl.create(ModalDetailGasPage,{
-          'jsonGas': marker.get('jsonGas')
-        },{showBackdrop:true, enableBackdropDismiss:true});
-        modal.present();
-      });
-    });
+    this.markers.push(marker);
+    // this.map.addMarker(marker).then((marker: Marker) => {
+    //   marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+    //     let modal = this.modalCtrl.create(ModalDetailGasPage,{
+    //       'jsonGas': marker.get('jsonGas')
+    //     },{showBackdrop:true, enableBackdropDismiss:true});
+    //     modal.present();
+    //   });
+    // });
     // this.markers.push(marker);
     if (totalCont == item) {
+      let labelOptions: MarkerLabel = {
+        bold: true,
+        fontSize: 15,
+        color: "white",
+        italic: true
+      };
+      let clusterIcons: MarkerClusterIcon[] = [
+          {min: 2, max: 100, url: "./assets/imgs/m1.png", anchor: {x: 16, y: 16}, label: labelOptions},
+          {min: 100, max: 1000, url: "./assets/imgs/m2.png", anchor: {x: 16, y: 16}, label: labelOptions},
+          {min: 1000, max: 2000, url: "./assets/imgs/m3.png", anchor: {x: 24, y: 24}, label: labelOptions},
+          {min: 2000, url: "./assets/imgs/m4.png",anchor: {x: 32,y: 32}, label: labelOptions}
+      ];
+      
+      let options: MarkerClusterOptions = {
+        markers: this.markers,
+        icons: clusterIcons,
+        boundsDraw: false,
+        maxZoomLevel: 18
+      };
+      this.map.addMarkerCluster(options).then((markerCluster: MarkerCluster) => {
+        markerCluster.on(GoogleMapsEvent.MARKER_CLICK).subscribe((params) => {
+          let marker = params[1];
+          let modal = this.modalCtrl.create(ModalDetailGasPage,{
+            'jsonGas': marker.get('jsonGas')
+          },{showBackdrop:true, enableBackdropDismiss:true});
+          modal.present();
+        });      
+      });
       this.loadingMapa.dismiss();
     }else{
       item = item + 1;
@@ -199,6 +256,20 @@ export class MapPage {
   }
   public verListadoGas(){
     this.navCtrl.push(ModalListGasPage,{jsonDataGas: this.jsonDataGas});
+  }
+  public presentPopover(ev) {
+
+    let popover = this.popoverCtrl.create(PopoverFilterMapPage, {
+      distance: this.distance
+    });
+
+    popover.present({
+      ev: ev
+    });
+  }
+  filterMapLoad(){
+    this.map.clear();
+    this.getPosition();
   }
 
 }
