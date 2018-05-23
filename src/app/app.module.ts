@@ -28,7 +28,9 @@ import { SuperTabsModule, SuperTabsController } from 'ionic2-super-tabs';
     BrowserModule,
     HttpModule,
     SuperTabsModule.forRoot(),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      backButtonText: 'Atras'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

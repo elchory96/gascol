@@ -1,10 +1,18 @@
 <ion-menu id="myMenu" type="overlay" side="left" [content]="content">
-  <ion-content>
-    <ul class="sidenav">
+    <ion-header>
+        <ion-navbar>
+            <ion-title>Acerca de GasCol</ion-title>
+        </ion-navbar>
+    </ion-header>
+    <ion-content padding>
+        <div class="aboutus">
+            <p>Sobre Nosotros</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc varius nec erat vitae faucibus. Pellentesque vel est at enim aliquet suscipit. Curabitur suscipit pellentesque ex, sit amet congue leo.</p>
+        </div>
+    <!-- <ul class="sidenav">
         <li>
             <div class="user-view">
                 <div class="background">
-                    <!-- <img src="http://materializecss.com/images/office.jpg"> -->
                 </div>
                 <a href="#user">
                     <img class="circle" src="https://www.cabe-africa.org/wp-content/uploads/2012/01/1.png">
@@ -19,7 +27,7 @@
         </li>
         <li>
         </li>
-    </ul>
-  </ion-content>
+    </ul> -->
+    </ion-content>
 </ion-menu>
 <ion-nav #content [root]="rootPage"></ion-nav>
