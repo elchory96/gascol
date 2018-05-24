@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { 
   IonicPage, 
   NavController, 
@@ -7,6 +8,7 @@ import {
   MenuController,
   LoadingController,
   PopoverController,
+  AlertController,
   Events
 } from 'ionic-angular';
 import { GasService } from '../../shared/gas-service';
@@ -57,7 +59,9 @@ export class MapPage {
     public menuCtrl: MenuController,
     public loadingCtrl: LoadingController,
     private popoverCtrl: PopoverController,
-    public events: Events
+    public events: Events,
+    private locationAccuracy: LocationAccuracy,
+    public alertCtrl: AlertController
   ) {
     this.menuCtrl.enable(true, 'myMenu');
     events.subscribe('map:filter', (distancerange) => {
@@ -73,7 +77,24 @@ export class MapPage {
   }
 
   ionViewDidLoad(){
-    this.loadMap();
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+      if(canRequest) {
+        // the accuracy option will be ignored by iOS
+        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+          () => {this.loadMap()},
+          error => {
+            let alert = this.alertCtrl.create({
+              title: 'Ups!',
+              subTitle: 'Necesitamos que actives el gps para que funcione correctamente la aplicacion!',
+              buttons: ['Aceptar']
+            });
+            alert.present();
+          }
+        );
+      }
+    
+    });
   }
 
   loadMap(){

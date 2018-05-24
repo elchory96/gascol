@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { MapPage } from '../pages/map/map';
 import { HomePage } from '../pages/home/home';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { HttpModule } from '@angular/http';
 import { GasService } from '../shared/gas-service';
 import { ModalDetailGasPage } from '../pages/modal-detail-gas/modal-detail-gas';
@@ -44,6 +45,7 @@ import { SuperTabsModule, SuperTabsController } from 'ionic2-super-tabs';
   providers: [
     StatusBar,
     GoogleMaps,
+    LocationAccuracy,
     HttpModule,
     SuperTabsController,
     SplashScreen,
