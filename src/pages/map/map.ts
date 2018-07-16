@@ -82,7 +82,10 @@ export class MapPage {
       if(canRequest) {
         // the accuracy option will be ignored by iOS
         this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-          () => {this.loadMap()},
+          () => {
+            console.log('Aquiii eNTRO ACCURANCY');
+            this.loadMap()
+          },
           error => {
             let alert = this.alertCtrl.create({
               title: 'Ups!',
@@ -105,6 +108,16 @@ export class MapPage {
         myLocation: false,
         myLocationButton: false,
         mapToolbar: false
+      },
+      preferences: {    
+        padding: {
+          top: 70,
+          left: 30,
+          right: 30,
+          bottom: 40
+        },
+    
+        building: true
       }
     };
 

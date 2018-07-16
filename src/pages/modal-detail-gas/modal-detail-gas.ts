@@ -35,7 +35,7 @@ export class ModalDetailGasPage {
     if(this.platform.is('ios')){
       window.open('maps://?q=' + destination, '_system');
     } else {
-      let label = encodeURI('My Label');
+      let label = encodeURI('Gasolinera: ' + this.jsonGas.label_gas);
       window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
     }
   }

@@ -33,7 +33,7 @@
     "cordova-android": "~6.3.0",
     "cordova-ios": "~4.5.4",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-googlemaps": "^2.3.4",
+    "cordova-plugin-googlemaps": "^2.3.6",
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git#2.6.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.1",
@@ -44,8 +44,10 @@
     "ionic-angular": "3.9.2",
     "ionic2-super-tabs": "^4.2.2",
     "ionicons": "3.0.0",
+    "minimist": "^1.2.0",
     "rxjs": "5.5.10",
     "sw-toolbox": "3.6.0",
+    "xml2js": "^0.4.19",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -61,15 +63,15 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-statusbar": {},
+      "cordova-plugin-request-location-accuracy": {},
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "AIzaSyA3qW4ss-krD6oKB7q5XpEcG0Ul4T2DBUg",
         "API_KEY_FOR_IOS": "AIzaSyAX8-QOnOMF3GsZ8JJLUQu1IBUuqh7ySKA",
-        "PLAY_SERVICES_VERSION": "15.0.0",
+        "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.1.1",
         "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
-      },
-      "cordova-plugin-request-location-accuracy": {}
+      }
     },
     "platforms": [
       "ios",
