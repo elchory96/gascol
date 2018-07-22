@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, NgZone } from '@angular/core';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { 
   IonicPage, 
@@ -61,7 +61,8 @@ export class MapPage {
     private popoverCtrl: PopoverController,
     public events: Events,
     private locationAccuracy: LocationAccuracy,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public zone: NgZone
   ) {
     this.menuCtrl.enable(true, 'myMenu');
     events.subscribe('map:filter', (distancerange) => {
@@ -84,7 +85,7 @@ export class MapPage {
         this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
           () => {
             console.log('Aquiii eNTRO ACCURANCY');
-            this.loadMap()
+            this.loadMap();
           },
           error => {
             let alert = this.alertCtrl.create({
@@ -95,6 +96,8 @@ export class MapPage {
             alert.present();
           }
         );
+      }else{
+        this.loadMap();
       }
     
     });
@@ -127,7 +130,9 @@ export class MapPage {
     this.map.one(GoogleMapsEvent.MAP_READY)
     .then(() => {
       // Now you can use all methods safely.
-      this.getPosition();
+      this.zone.run(() => {
+        this.getPosition();
+      });
     })
     .catch(error =>{
       console.log(error);
